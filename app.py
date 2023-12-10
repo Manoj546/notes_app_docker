@@ -1,12 +1,11 @@
 from flask import Flask, render_template, request, redirect
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect
 import os
 load_dotenv()
 
 class Database:
-    def _init_(self, app):
+    def __init__(self, app):
         app.config['MONGO_URI'] = os.getenv("DATABASE_URL")
         self.mongo = PyMongo(app)
         self.app = app  # Store the Flask app as an attribute
@@ -64,7 +63,8 @@ def delete_tasks():
     except Exception as e:
         print(f"Error deleting tasks: {str(e)}")
         return redirect('/')
-    
+
+
 @app.route('/update_task', methods=['POST'])
 def update_task():
     try:
@@ -81,6 +81,7 @@ def update_task():
     except Exception as e:
         print(f"Error updating task: {str(e)}")
         return redirect('/')
+    
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(debug=True)
