@@ -10,15 +10,11 @@ class Database:
         self.mongo = PyMongo(app)
 
 # Create an instance of the Database class
-db = Database()
+db = Database(Flask(__name__))
 from Model.todoModel import TodoModel
-
-app = Flask(__name__)
-db = db(app)
+# Create an instance of the TodoModel class
 todo_model = TodoModel(db)
-app = Flask(__name__)
-# Initialize the app with the Database instance
-db.init_app(app)
+app = db.app  # Access the Flask app from the Database instance
 app.config['SECRET_KEY'] = 'your_secret_key'
 
 @app.route('/tasks', methods=['POST'])
