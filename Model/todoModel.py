@@ -3,7 +3,7 @@ from flask_pymongo import pymongo
 from bson import ObjectId
 
 class TodoModel:
-    def _init_(self, db):
+    def __init__(self, db):
         self.tasks = db.mongo.db.task
 
     def create_task(self, description, category, due_date):

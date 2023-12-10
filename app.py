@@ -63,8 +63,7 @@ def delete_tasks():
     except Exception as e:
         print(f"Error deleting tasks: {str(e)}")
         return redirect('/')
-
-
+    
 @app.route('/update_task', methods=['POST'])
 def update_task():
     try:
@@ -81,7 +80,6 @@ def update_task():
     except Exception as e:
         print(f"Error updating task: {str(e)}")
         return redirect('/')
-    
 
 if __name__ == '__main__':
     app.run(debug=True)
