@@ -1,5 +1,6 @@
 # todoModel.py
 from flask_pymongo import pymongo
+from bson import ObjectId
 
 class TodoModel:
     def __init__(self, db):
@@ -14,12 +15,11 @@ class TodoModel:
         self.tasks.insert_one(task)
 
     def get_tasks(self):
-        return list(self.tasks.find({}, {'_id': False}))
+        return list(self.tasks.find({}, {'_id': True, 'description': True, 'category': True, 'dueDate': True}))
 
     def delete_tasks(self, task_ids):
-        print(f"Deleting tasks: {task_ids}")
         self.tasks.delete_many({'_id': {'$in': task_ids}})
         
+
     def delete_by_id(self, task_id):
-        print(f"Deleting task: {task_id}")
-        self.tasks.delete_one({'_id': task_id})
+        self.tasks.delete_one({'_id': ObjectId(task_id)})

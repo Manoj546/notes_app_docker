@@ -51,12 +51,13 @@ def index():
         return render_template('index.html', tasks=[], categoryColors={})
 
 # web.py
-@app.route('/delete_tasks', methods=['POST'])
 def delete_tasks():
     try:
         task_ids = request.form.getlist('taskIds')
+
         for task_id in task_ids:
             todo_model.delete_by_id(task_id)
+            
         return redirect('/')
     except Exception as e:
         print(f"Error deleting tasks: {str(e)}")
