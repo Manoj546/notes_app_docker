@@ -5,7 +5,13 @@ FROM python:3.8-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY app.py .
+COPY Database ./Database
+COPY Model ./Model
+COPY static ./static
+COPY templates ./templates
+COPY .env .
+COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install Flask flask_pymongo python-dotenv
