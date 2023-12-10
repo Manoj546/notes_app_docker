@@ -2,9 +2,19 @@ from flask import Flask
 import os
 import importlib
 
-module_path = os.environ.get("DATABASE_MODULE_PATH", "Database.db")
-database_module = importlib.import_module(module_path)
-db = database_module.db
+from flask_pymongo import PyMongo
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+class Database:
+    def __init__(self, app):
+        app.config['MONGO_URI'] = os.getenv("DATABASE_URL")
+        self.mongo = PyMongo(app)
+        
+
+db = Database
 
 def create_app():
     app = Flask(__name__)
