@@ -1,5 +1,10 @@
 from flask import Flask
-from Database.db import db
+import os
+import importlib
+
+module_path = os.environ.get("DATABASE_MODULE_PATH", "Database.db")
+database_module = importlib.import_module(module_path)
+db = database_module.db
 
 def create_app():
     app = Flask(__name__)
