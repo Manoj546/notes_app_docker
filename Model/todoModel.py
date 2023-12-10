@@ -22,4 +22,5 @@ class TodoModel:
         
 
     def delete_by_id(self, task_id):
+        print(f"Deleting task: {task_id}")
         self.tasks.delete_one({'_id': ObjectId(task_id)})
