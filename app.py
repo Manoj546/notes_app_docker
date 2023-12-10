@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 import os
-
-
 load_dotenv()
 
 class Database:
@@ -18,7 +16,10 @@ from Model.todoModel import TodoModel
 app = Flask(__name__)
 db = db(app)
 todo_model = TodoModel(db)
-
+app = Flask(__name__)
+# Initialize the app with the Database instance
+db.init_app(app)
+app.config['SECRET_KEY'] = 'your_secret_key'
 
 @app.route('/tasks', methods=['POST'])
 def create_task():
